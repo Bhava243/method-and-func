@@ -1,7 +1,9 @@
+import streamlit as st
+
 def display_menu():
-    print("Note taking application")
-    print("1. View notes")
-    print("2. Add notes")
+    st.title("Note taking application")
+    st.write("1. View notes")
+    st.write("2. Add notes")
     print("3. Delete notes")
     print("4. Search notes")
     print("5. Exit")
