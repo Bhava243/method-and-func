@@ -43,23 +43,21 @@ def main():
     notes = {}
     while True:
         display_menu()
-        try:
-            choice = int(input("Enter your choice (1-5): "))
-            if choice == 1:
+        
+        choice = int(input("Enter your choice (1-5): "))
+        if choice == 1:
                 view_notes(notes)
-            elif choice == 2:
+        elif choice == 2:
                 add_notes(notes)
-            elif choice == 3:
+        elif choice == 3:
                 del_notes(notes)
-            elif choice == 4:
+        elif choice == 4:
                 search_notes(notes)
-            elif choice == 5:
+        elif choice == 5:
                 print("Exiting the application")
                 break
-            else:
+        else:
                 print("Invalid choice. Please enter a number from 1 to 5.")
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
 
 if __name__ == "__main__":
     main()
