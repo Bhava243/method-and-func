@@ -1,65 +1,64 @@
 import streamlit as st
 
 def display_menu():
-    st.title("Note taking application")
-    st.write("1. View notes")
-    st.write("2. Add notes")
-    print("3. Delete notes")
-    print("4. Search notes")
-    print("5. Exit")
+    st.title("Contact Manager")
+    st.write("1. View contacts")
+    st.write("2. Add a new contact")
+    st.write("3. Search for a contact")
+    st.write("4. Delete a contact")
+    st.write("5. Exit")
 
-def view_notes(notes):
-    if not notes:
-        print("No notes found")
+def view_contact(contacts):
+    if not contacts:
+        st.write("No contacts found.")
     else:
-        print("Listing all notes:")
-        for title, content in notes.items():
-            print(f"Title: {title}")
-            print(f"Content: {content}")
-            print("--------------")
+        st.write("Contacts:")
+        for name, phone in contacts.items():
+            st.write(f"Name: {name}, Phone: {phone}")
 
-def add_notes(notes):
-    title = input("Enter a title for the note: ")
-    content = input("Enter content for the note: ")
-    notes[title] = content
-    print(f"Note '{title}' added successfully")
-
-def del_notes(notes):
-    title = input("Enter the title of the note you want to delete: ")
-    if title in notes:
-        del notes[title]
-        print(f"Note '{title}' deleted successfully")
+def add_contact(contacts):
+    name = st.text_input("Enter a name to add:", key="add_name")
+    phone = st.text_input("Enter a phone number to add:", key="add_phone")
+    if name and phone:
+        contacts[name] = phone
+        st.write(f"Contact {name} added successfully.")
     else:
-        print(f"Note '{title}' not found")
+        st.write("Please enter both name and phone number.")
 
-def search_notes(notes):
-    title = input("Enter the title of the note you want to search for: ")
-    if title in notes:
-        print(f"Note found:")
-        print(f"Title: {title}")
-        print(f"Content: {notes[title]}")
+def search_contact(contacts):
+    name = st.text_input("Enter a name to search:", key="search_name")
+    if name in contacts:
+        st.write(f"Contact {name} found.")
+        st.write(f"Phone: {contacts[name]}")
     else:
-        print(f"Note '{title}' not found")
+        st.write(f"Contact {name} not found.")
+
+def delete_contact(contacts):
+    name = st.text_input("Enter a name to delete:", key="delete_name")
+    if name in contacts:
+        del contacts[name]
+        st.write(f"Contact {name} deleted successfully.")
+    else:
+        st.write(f"Contact {name} not found.")
 
 def main():
-    notes = {}
+    contacts = {}
     while True:
         display_menu()
-        
-        choice = int(input("Enter your choice (1-5): "))
-        if choice == 1:
-                view_notes(notes)
-        elif choice == 2:
-                add_notes(notes)
-        elif choice == 3:
-                del_notes(notes)
-        elif choice == 4:
-                search_notes(notes)
-        elif choice == 5:
-                print("Exiting the application")
-                break
+        choice = st.text_input("Enter a number from (1-5):", key="menu_choice")
+        if choice == '1':
+            view_contact(contacts)
+        elif choice == '2':
+            add_contact(contacts)
+        elif choice == '3':
+            search_contact(contacts)
+        elif choice == '4':
+            delete_contact(contacts)
+        elif choice == '5':
+            st.write("Exiting the Contact Manager.")
+            break
         else:
-                print("Invalid choice. Please enter a number from 1 to 5.")
+            st.write("Enter a number from 1-5.")
 
 if __name__ == "__main__":
     main()
